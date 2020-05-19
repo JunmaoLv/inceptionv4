@@ -7,4 +7,4 @@ saved_history_data/*
 saved_model/*
 !saved_model/README.md
 dataset/*
-dataset/README.md
+!dataset/README.md
