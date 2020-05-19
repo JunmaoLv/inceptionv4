@@ -1,0 +1,10 @@
+.idea
+__pycache__
+origin_dataset/*
+!origin_dataset/README.md
+saved_history_data/*
+!saved_history_data/README.md
+saved_model/*
+!saved_model/README.md
+dataset/*
+dataset/README.md
