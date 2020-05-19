@@ -16,7 +16,7 @@ def get_single_picture_prediction(model, picture_dir):
 
 
 def get_list_picture_prediction(model, picture_dir):
-    class_name_list = [s for s in os.listdir(picture_dir) if 'README' not in s]
+    class_name_list = sorted([s for s in os.listdir(picture_dir) if 'README' not in s])
     print('class name:')
     print(class_name_list)
     image_tensor_list = []
@@ -32,10 +32,13 @@ def get_list_picture_prediction(model, picture_dir):
     prediction = model(images, training=False)
     pred_class_num_list = tf.math.argmax(prediction, axis=-1)
     pred_class_name_list = []
-    for pred_class_num_item in pred_class_num_list:
+    true_num = 0
+    for index, pred_class_num_item in enumerate(pred_class_num_list):
+        if class_name_list[pred_class_num_item] == class_name_list[int(index//5)]:
+            true_num = true_num + 1
         pred_class_name_item = class_name_list[pred_class_num_item]
         pred_class_name_list.append(pred_class_name_item)
-    return pred_class_name_list, image_tensor_list_length
+    return pred_class_name_list, image_tensor_list_length, true_num
 
 
 if __name__ == '__main__':
@@ -59,9 +62,11 @@ if __name__ == '__main__':
 
     # pred_class = get_single_picture_prediction(model, test_image_dir)
     model_predict_start_time = timer()
-    pred_class_name, pred_num = get_list_picture_prediction(model, test_image_dir)
+    pred_class_name, pred_num, pred_true_num = get_list_picture_prediction(model, test_image_dir)
     model_predict_end_time = timer()
+    acc = pred_true_num / pred_num
     # print('every predict spend : {} seconds'.format((model_predict_end_time - model_predict_start_time)
     #                                                 / len(pred_class_name)))
     print('{} predict spend : {} seconds'.format(pred_num, model_predict_end_time - model_predict_start_time))
     print(pred_class_name)
+    print('the test acc is {}, the proportion {}/{}'.format(acc, pred_true_num, pred_num))
