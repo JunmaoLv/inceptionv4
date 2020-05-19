@@ -1,16 +1,16 @@
 import os
 import pickle
 # some training parameters
-EPOCHS = 3
-BATCH_SIZE = 2
-NUM_CLASSES = 2
+EPOCHS = 30
+BATCH_SIZE = 32
+NUM_CLASSES = 5
 IMAGE_HEIGHT = 299
 IMAGE_WIDTH = 299
 CHANNELS = 3
 
 save_model_dir = "saved_model/"
 save_every_n_epoch = 10
-test_image_dir = "dataset/test/"
+test_image_dir = "test_dataset/"
 
 dataset_dir = "dataset/"
 train_dir = dataset_dir + "train"
