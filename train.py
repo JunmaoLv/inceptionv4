@@ -69,7 +69,7 @@ if __name__ == '__main__':
     valid_accuracy_array = []
 
     # define saved flag
-    cross_validate_flag = 'cross-validate'
+    cross_validate_flag = 'cross-validation'
 
     # @tf.function
     def train_step(image_batch, label_batch):
@@ -154,7 +154,7 @@ if __name__ == '__main__':
                 valid_accuracy_array.append(np.mean(valid_accuracy_k_fold))
         else:
             global cross_validate_flag
-            cross_validate_flag = 'no-cross-validate'
+            cross_validate_flag = 'no-cross-validation'
             train_dataset, valid_dataset, test_dataset, train_count, valid_count, test_count = generate_datasets()
             for epoch in range(EPOCHS):
                 step = 0
